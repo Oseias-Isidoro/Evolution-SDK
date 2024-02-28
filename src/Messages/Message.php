@@ -25,6 +25,11 @@ class Message
         return $this->data;
     }
 
+    public function hasContact(): bool
+    {
+        return isset($this->data['contactMessage']);
+    }
+
     public function hasSticker(): bool
     {
         return isset($this->data['stickerMessage']);

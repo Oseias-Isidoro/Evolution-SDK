@@ -47,7 +47,11 @@ class Messenger
             return $this->uriGenerator('sendSticker', $message->getInstance());
         }
 
-        return $this->uriGenerator('sendText', $message->getInstance());
+        if ($message->hasSticker()) {
+            return $this->uriGenerator('sendSticker', $message->getInstance());
+        }
+
+        return $this->uriGenerator('sendContact', $message->getInstance());
     }
 
     private function uriGenerator(string $typeMessage, string $instance): string

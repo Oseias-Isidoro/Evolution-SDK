@@ -108,6 +108,17 @@ class MessageBuilder implements MessageBuilderInterface
         return $this;
     }
 
+    public function contact(string $fullName, string $phoneNumber): MessageBuilder
+    {
+        $this->message['contactMessage'] = [
+            'fullName' => $fullName,
+            'wuid' => $phoneNumber,
+            'phoneNumber' => "+$phoneNumber",
+        ];
+
+        return $this;
+    }
+
     public function hasLocation(): bool
     {
         return isset($this->message['locationMessage']);

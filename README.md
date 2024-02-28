@@ -97,5 +97,5 @@ if ((new Messenger())->send($message)) {
 | Send Location                                                                  | ✔ |
 | Send List                                                                      | ❌ |
 | Send Link Preview                                                              | ❌ |
-| Send Contact                                                                   | ❌ |
+| Send Contact                                                                   | ✔ |
 | Send Reaction - emoji                                                          | ✔ |
