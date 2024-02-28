@@ -39,6 +39,10 @@ class Messenger
             return $this->uriGenerator('sendWhatsAppAudio', $message->getInstance());
         }
 
+        if ($message->hasLocation()) {
+            return $this->uriGenerator('sendLocation', $message->getInstance());
+        }
+
         return $this->uriGenerator('sendText', $message->getInstance());
     }
 

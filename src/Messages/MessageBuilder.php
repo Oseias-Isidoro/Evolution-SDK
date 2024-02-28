@@ -88,6 +88,22 @@ class MessageBuilder implements MessageBuilderInterface
         return $this;
     }
 
+    public function location(string $name, $latitude, $longitude): MessageBuilder
+    {
+        $this->message['locationMessage'] = [
+            'name' => $name,
+            'latitude' => $latitude,
+            'longitude' => $longitude,
+        ];
+
+        return $this;
+    }
+
+    public function hasLocation(): bool
+    {
+        return isset($this->message['locationMessage']);
+    }
+
     private function hasMedia(): bool
     {
         return isset($this->message['mediaMessage']);

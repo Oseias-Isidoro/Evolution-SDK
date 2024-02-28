@@ -25,6 +25,11 @@ class Message
         return $this->data;
     }
 
+    public function hasLocation(): bool
+    {
+        return isset($this->data['locationMessage']);
+    }
+
     public function hasMedia(): bool
     {
         return isset($this->data['mediaMessage']);

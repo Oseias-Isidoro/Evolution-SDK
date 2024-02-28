@@ -94,7 +94,7 @@ if ((new Messenger())->send($message)) {
 | Send Media File                                                                | ✔ |
 | Send Audio type WhatsApp                                                       | ✔ |
 | Send Audio type WhatsApp - File                                                | ✔ |
-| Send Location                                                                  | ❌ |
+| Send Location                                                                  | ✔ |
 | Send List                                                                      | ❌ |
 | Send Link Preview                                                              | ❌ |
 | Send Contact                                                                   | ❌ |
