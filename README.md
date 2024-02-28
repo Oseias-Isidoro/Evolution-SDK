@@ -11,7 +11,7 @@ in your .env
 
 ```text
 EVOLUTION_TOKEN='{TOKEN}'
-EVOLUTION_URL='{EVOLUTION_URL}'
+EVOLUTION_URL='https://evolution.com'
 ```
 
 ## Quick start and examples
@@ -39,66 +39,48 @@ if ((new Messenger())->send($message)) {
 }
 
 ```
-* just text with replay
+
+## MessageBuilder methods available
+#### Media:
 ```php
-require __DIR__ . '/vendor/autoload.php';
-
-use EvolutionSDK\Messages\MessageBuilder;
-use EvolutionSDK\Messages\Messenger;
-
-$builder = new MessageBuilder();
-
-$message = $builder
-    ->from('[instance]')
-    ->to('[remoteJid]')
-    ->text('simple text')
-    ->reply([
-        "key" => [
-            "id" => "BAE5A93426089623",
-        ],
-    ])
-    ->getMessage();
-
-
-if ((new Messenger())->send($message)) {
-    echo "success";
-} else {
-    echo "error";
-}
-
+    media(string $url, string $mediaType, string $fileName = null);
+    
+    $builder->media(
+        'https://path_to_file',
+        'document', // document, image, video
+        'file_name' // Optional, just for document media type 
+    );
+```    
+#### Audio:
+```php
+    audio(string $url);
+    
+    $builder->audio('https://path_to_file');
 ```
-* media with caption (for no caption just remove ->text())
+#### Mentions:
 ```php
-require __DIR__ . '/vendor/autoload.php';
-
-use EvolutionSDK\Messages\MessageBuilder;
-use EvolutionSDK\Messages\Messenger;
-
-$builder = new MessageBuilder();
-
-$message = $builder
-    ->from('[instance]')
-    ->to('[remoteJid]')
-    ->text('simple text')
-    ->media(
-        'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf',
-        'document',
-        'FileName'
-    )
-    ->reply([
+    mentions(bool $everyOne = true, array $data = []);
+    
+    $builder->mentions(false, [
+        "[remoteJid]",
+        "[remoteJid]",
+    ]);
+```
+#### Reply:
+```php
+    reply(array $data);
+    
+    $builder->reply([
         "key" => [
-            "id" => "BAE5A93426089623",
+            "remoteJid" => "[remoteJid]@s.whatsapp.net",
+            "fromMe" => "true",
+            "id" => "BAE5766236A2AEFF",
+            "participant" => "",
         ],
-    ])
-    ->getMessage();
-
-
-if ((new Messenger())->send($message)) {
-    echo "success";
-} else {
-    echo "error";
-}
-
+        "message" => [
+            "conversation" => "Plain text message, sent with the _Evolution-API_ 🚀."
+        ]
+    ]);
 ```
 
 ## Supported messages type 
