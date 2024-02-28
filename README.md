@@ -2,6 +2,14 @@
 ``
 composer require "oseias-isidoro/evoluiton-sdk"
 ``
+ 
+in your .env
+
+```text
+EVOLUTION_TOKEN='{TOKEN}'
+EVOLUTION_URL='{EVOLUTION_URL}'
+```
+
 ## Quick start and examples
 
 * just text
