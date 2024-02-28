@@ -13,7 +13,7 @@ class Messenger
 
     public function __construct()
     {
-        $this->API = new API();
+        $this->API = API::getInstance();
     }
 
     /**
