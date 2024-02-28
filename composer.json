@@ -1,0 +1,23 @@
+{
+  "name": "oseias-isidoro/evoluiton-sdk",
+  "description": "A SDK for https://github.com/EvolutionAPI/evolution-api",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Oseias Isidoro",
+      "email": "oseiasisidoro@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "guzzlehttp/guzzle": "^7.7",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "EvolutionSDK\\": "src/"
+    }
+  }
+}
