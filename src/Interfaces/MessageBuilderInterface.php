@@ -12,5 +12,6 @@ interface MessageBuilderInterface
     public function mentions(bool $everyOne = true, array $data = []);
     public function reply(array $data);
     public function location(string $name, string $latitude, string $longitude);
+    public function sticker(string $url);
     public function getMessage();
 }

@@ -99,6 +99,15 @@ class MessageBuilder implements MessageBuilderInterface
         return $this;
     }
 
+    public function sticker(string $url): MessageBuilder
+    {
+        $this->message['stickerMessage'] = [
+            'image' => $url,
+        ];
+
+        return $this;
+    }
+
     public function hasLocation(): bool
     {
         return isset($this->message['locationMessage']);

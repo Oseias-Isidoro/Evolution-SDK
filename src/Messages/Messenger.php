@@ -43,6 +43,10 @@ class Messenger
             return $this->uriGenerator('sendLocation', $message->getInstance());
         }
 
+        if ($message->hasSticker()) {
+            return $this->uriGenerator('sendSticker', $message->getInstance());
+        }
+
         return $this->uriGenerator('sendText', $message->getInstance());
     }
 

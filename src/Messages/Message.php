@@ -25,6 +25,11 @@ class Message
         return $this->data;
     }
 
+    public function hasSticker(): bool
+    {
+        return isset($this->data['stickerMessage']);
+    }
+
     public function hasLocation(): bool
     {
         return isset($this->data['locationMessage']);
