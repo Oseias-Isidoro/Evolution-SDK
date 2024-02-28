@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace EvolutionSDK\Messages;
 
 use EvolutionSDK\HttpClient\API;
+use EvolutionSDK\HttpClient\Response;
 use GuzzleHttp\Exception\GuzzleException;
 
 class Messenger
@@ -19,14 +20,12 @@ class Messenger
     /**
      * @throws GuzzleException
      */
-    public function send(Message $message): bool
+    public function send(Message $message): Response
     {
-        $response = $this->API->post(
+        return $this->API->post(
             $this->getUri($message),
             $message->getData()
         );
-
-        return $response->successful();
     }
 
     private function getUri(Message $message): string
@@ -47,11 +46,11 @@ class Messenger
             return $this->uriGenerator('sendSticker', $message->getInstance());
         }
 
-        if ($message->hasSticker()) {
-            return $this->uriGenerator('sendSticker', $message->getInstance());
+        if ($message->hasContact()) {
+            return $this->uriGenerator('sendContact', $message->getInstance());
         }
 
-        return $this->uriGenerator('sendContact', $message->getInstance());
+        return $this->uriGenerator('sendText', $message->getInstance());
     }
 
     private function uriGenerator(string $typeMessage, string $instance): string
