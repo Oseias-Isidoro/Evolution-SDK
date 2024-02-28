@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace EvolutionSDK\HttpClient;
 
-use Dotenv\Dotenv;
 use EvolutionSDK\Singleton;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
@@ -17,9 +16,8 @@ class API extends Singleton
 
     protected function __construct()
     {
-        Dotenv::createUnsafeImmutable('./')->load();
-        $this->base_url = getenv('EVOLUTION_URL');
-        $this->token = getenv('EVOLUTION_TOKEN');
+        $this->base_url = $_SERVER['EVOLUTION_URL'];
+        $this->token = $_SERVER['EVOLUTION_TOKEN'];
 
         $this->headers = [
             'Content-Type' => 'application/json',
