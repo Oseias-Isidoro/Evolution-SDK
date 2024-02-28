@@ -1,3 +1,7 @@
+## Description
+A simple SDK for https://github.com/EvolutionAPI/evolution-api. \
+This uses the BUILDER design pattern to create the message request.
+
 ## Install
 ``
 composer require "oseias-isidoro/evoluiton-sdk"
