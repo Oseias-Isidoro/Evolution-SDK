@@ -111,9 +111,11 @@ class MessageBuilder implements MessageBuilderInterface
     public function contact(string $fullName, string $phoneNumber): MessageBuilder
     {
         $this->message['contactMessage'] = [
-            'fullName' => $fullName,
-            'wuid' => $phoneNumber,
-            'phoneNumber' => "+$phoneNumber",
+            [
+                'fullName' => $fullName,
+                'wuid' => $phoneNumber,
+                'phoneNumber' => "+$phoneNumber",
+            ]
         ];
 
         return $this;
