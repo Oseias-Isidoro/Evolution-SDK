@@ -145,4 +145,9 @@ class MessageBuilder implements MessageBuilderInterface
 
         return new Message($this->message, $this->instance);
     }
+
+    public function customField(string $key, string $value)
+    {
+        $this->message[$key] = $value;
+    }
 }
