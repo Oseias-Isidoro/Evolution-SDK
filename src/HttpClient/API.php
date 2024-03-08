@@ -25,6 +25,17 @@ class API extends Singleton
         ];
     }
 
+    public function setBaseUrl(string $base_url): void
+    {
+        $this->base_url = $base_url;
+    }
+
+    public function setToken(string $token): void
+    {
+        $this->headers['apiKey'] = $token;
+        $this->token = $token;
+    }
+
     /**
      * @throws GuzzleException
      */
