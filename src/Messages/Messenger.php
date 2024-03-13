@@ -14,12 +14,7 @@ class Messenger
 
     public function __construct(string $base_url = null, string $token = null)
     {
-        $this->API = API::getInstance();
-
-        if ($base_url AND $token) {
-            $this->API->setBaseUrl($base_url);
-            $this->API->setToken($token);
-        }
+        $this->API = new API($base_url, $token);
     }
 
     /**
