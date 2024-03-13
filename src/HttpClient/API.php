@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace EvolutionSDK\HttpClient;
 
-use EvolutionSDK\Singleton;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
-class API extends Singleton
+class API
 {
     private string $base_url;
-    private array $headers;
     private string $token;
 
-    protected function __construct()
+    private array $headers;
+
+    public function __construct(string $base_url, string $token)
     {
-        $this->base_url = $_SERVER['EVOLUTION_URL'];
-        $this->token = $_SERVER['EVOLUTION_TOKEN'];
+        $this->base_url = $base_url;
+        $this->token = $token;
 
         $this->headers = [
             'Content-Type' => 'application/json',
