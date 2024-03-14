@@ -25,16 +25,22 @@ class InstanceHandler
         string $webhook,
         array $events = [],
         bool $qrcode = true,
-        bool $webhookByEvents = false
+        bool $webhookByEvents = false,
+        array $customFields = []
     ): Instance {
-        $response = $this->API->post('/instance/create', [
+
+        $payload = [
             'instanceName' => $name,
             'token' => $token,
             'qrcode' => $qrcode,
             'events' => $events,
             'webhookByEvents' => $webhookByEvents,
             'webhook' => $webhook,
-        ]);
+        ];
+
+        $payload = array_merge($payload, $customFields);
+
+        $response = $this->API->post('/instance/create', $payload);
 
         if ($response->failed()) {
             throw new \Exception($response->body(), $response->status());
