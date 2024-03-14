@@ -4,14 +4,14 @@ namespace EvolutionSDK\Instances;
 
 class Instance
 {
-    private string $name;
-    private array $qrcode;
-    private string $owner;
-    private string $profileName;
-    private string $profilePictureUrl;
-    private string $profileStatus;
-    private string $status;
-    private string $apikey;
+    private ?string $name = null;
+    private ?array $qrcode = null;
+    private ?string $owner = null;
+    private ?string $profileName = null;
+    private ?string $profilePictureUrl = null;
+    private ?string $profileStatus = null;
+    private ?string $status = null;
+    private ?string $apikey = null;
 
 //    public function connect() {}
 //    public function restart() {}
@@ -20,7 +20,7 @@ class Instance
 //    public function status() {}
 //    public function webhooks() {}
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -30,7 +30,7 @@ class Instance
         $this->name = $name;
     }
 
-    public function getQrcode(): array
+    public function getQrcode(): ?array
     {
         return $this->qrcode;
     }
@@ -40,7 +40,7 @@ class Instance
         $this->qrcode = $qrcode;
     }
 
-    public function getOwner(): string
+    public function getOwner(): ?string
     {
         return $this->owner;
     }
@@ -50,7 +50,7 @@ class Instance
         $this->owner = $owner;
     }
 
-    public function getProfileName(): string
+    public function getProfileName(): ?string
     {
         return $this->profileName;
     }
@@ -60,7 +60,7 @@ class Instance
         $this->profileName = $profileName;
     }
 
-    public function getProfilePictureUrl(): string
+    public function getProfilePictureUrl(): ?string
     {
         return $this->profilePictureUrl;
     }
@@ -70,7 +70,7 @@ class Instance
         $this->profilePictureUrl = $profilePictureUrl;
     }
 
-    public function getProfileStatus(): string
+    public function getProfileStatus(): ?string
     {
         return $this->profileStatus;
     }
@@ -80,7 +80,7 @@ class Instance
         $this->profileStatus = $profileStatus;
     }
 
-    public function getStatus(): string
+    public function getStatus(): ?string
     {
         return $this->status;
     }
@@ -90,7 +90,7 @@ class Instance
         $this->status = $status;
     }
 
-    public function getApikey(): string
+    public function getApikey(): ?string
     {
         return $this->apikey;
     }
