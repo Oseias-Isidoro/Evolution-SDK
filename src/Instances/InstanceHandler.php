@@ -55,9 +55,24 @@ class InstanceHandler
      * @throws GuzzleException
      * @throws Exception
      */
-    public function connectionState(string $instanceName)
+    public function connectionState(string $instanceName): object
     {
         $response = $this->API->get('/instance/connectionState/'.$instanceName);
+
+        if ($response->failed()) {
+            throw new Exception($response->body(), $response->status());
+        }
+
+        return $response->object();
+    }
+
+    /**
+     * @throws GuzzleException
+     * @throws Exception
+     */
+    public function connect(string $instanceName): object
+    {
+        $response = $this->API->get('/instance/connect/'.$instanceName);
 
         if ($response->failed()) {
             throw new Exception($response->body(), $response->status());
