@@ -4,6 +4,7 @@ namespace EvolutionSDK\Instances;
 
 use EvolutionSDK\HttpClient\API;
 use EvolutionSDK\Transformers\APIInstanceResponse\APIInstanceResponseTransformer;
+use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 
 class InstanceHandler
@@ -17,7 +18,7 @@ class InstanceHandler
 
     /**
      * @throws GuzzleException
-     * @throws \Exception
+     * @throws Exception
      */
     public function create(
         string $name,
@@ -43,10 +44,25 @@ class InstanceHandler
         $response = $this->API->post('/instance/create', $payload);
 
         if ($response->failed()) {
-            throw new \Exception($response->body(), $response->status());
+            throw new Exception($response->body(), $response->status());
         }
 
         return (new APIInstanceResponseTransformer($response))
             ->toInstanceObject();
+    }
+
+    /**
+     * @throws GuzzleException
+     * @throws Exception
+     */
+    public function connectionState(string $instanceName)
+    {
+        $response = $this->API->get('/instance/connectionState/'.$instanceName);
+
+        if ($response->failed()) {
+            throw new Exception($response->body(), $response->status());
+        }
+
+        return $response->object();
     }
 }
