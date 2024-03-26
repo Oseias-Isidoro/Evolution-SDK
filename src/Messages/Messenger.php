@@ -50,6 +50,10 @@ class Messenger
             return $this->uriGenerator('sendContact', $message->getInstance());
         }
 
+        if ($message->hasTemplate()) {
+            return $this->uriGenerator('sendTemplate', $message->getInstance());
+        }
+
         return $this->uriGenerator('sendText', $message->getInstance());
     }
 

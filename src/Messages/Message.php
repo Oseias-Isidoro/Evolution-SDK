@@ -49,4 +49,9 @@ class Message
     {
         return isset($this->data['audioMessage']);
     }
+
+    public function hasTemplate(): bool
+    {
+        return isset($this->data['templateMessage']);
+    }
 }

@@ -121,6 +121,17 @@ class MessageBuilder implements MessageBuilderInterface
         return $this;
     }
 
+    public function templateMessage(string $name, string $language, array $components): MessageBuilder
+    {
+        $this->message['templateMessage'] = [
+            'name' => $name,
+            'language' => $language,
+            'components' => $components
+        ];
+
+        return $this;
+    }
+
     public function hasLocation(): bool
     {
         return isset($this->message['locationMessage']);

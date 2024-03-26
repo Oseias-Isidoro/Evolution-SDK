@@ -14,6 +14,7 @@ interface MessageBuilderInterface
     public function location(string $name, string $latitude, string $longitude);
     public function sticker(string $url);
     public function contact(string $fullName, string $phoneNumber);
+    public function templateMessage(string $name, string $language, array $components);
     public function customField(string $key, string $value);
     public function getMessage();
 }
