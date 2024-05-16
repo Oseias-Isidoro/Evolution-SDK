@@ -80,4 +80,34 @@ class InstanceHandler
 
         return $response->object();
     }
+
+    /**
+     * @throws GuzzleException
+     * @throws Exception
+     */
+    public function delete(string $instanceName): object
+    {
+        $response = $this->API->delete('/instance/delete/'.$instanceName);
+
+        if ($response->failed()) {
+            throw new Exception($response->body(), $response->status());
+        }
+
+        return $response->object();
+    }
+
+    /**
+     * @throws GuzzleException
+     * @throws Exception
+     */
+    public function logout(string $instanceName): object
+    {
+        $response = $this->API->delete('/instance/logout/'.$instanceName);
+
+        if ($response->failed()) {
+            throw new Exception($response->body(), $response->status());
+        }
+
+        return $response->object();
+    }
 }
