@@ -21,7 +21,8 @@ class APIInstanceResponseTransformer
         $response = $this->response->object();
 
         $instance->setName($response->instance->instanceName);
-        $instance->setApikey($response->hash->apikey);
+
+        if (isset($response->hash->apikey)) $instance->setApikey($response->hash->apikey);
 
         if (isset($response->qrcode)) {
             $instance->setQrcode((array)$response->qrcode);
