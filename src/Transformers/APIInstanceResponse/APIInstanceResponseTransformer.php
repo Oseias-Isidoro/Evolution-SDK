@@ -22,7 +22,11 @@ class APIInstanceResponseTransformer
 
         $instance->setName($response->instance->instanceName);
 
-        if (isset($response->hash->apikey)) $instance->setApikey($response->hash->apikey);
+        if (isset($response->hash->apikey)) {
+            $instance->setApikey($response->hash->apikey);
+        } else {
+            $instance->setApikey($response->hash);
+        }
 
         if (isset($response->qrcode)) {
             $instance->setQrcode((array)$response->qrcode);
