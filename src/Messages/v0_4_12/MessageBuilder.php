@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace EvolutionSDK\Messages;
+namespace EvolutionSDK\Messages\v0_4_12;
 
 use EvolutionSDK\Interfaces\MessageBuilderInterface;
+use EvolutionSDK\Messages\Message;
 
 class MessageBuilder implements MessageBuilderInterface
 {
