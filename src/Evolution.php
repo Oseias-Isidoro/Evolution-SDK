@@ -2,27 +2,65 @@
 
 namespace EvolutionSDK;
 
-use EvolutionSDK\Instances\InstanceHandler;
+use EvolutionSDK\HttpClient\API;
+use EvolutionSDK\Instances\v0_4_12\InstanceHandler;
+use EvolutionSDK\Interfaces\InstanceInterface;
+use EvolutionSDK\Interfaces\MessageBuilderInterface;
 use EvolutionSDK\Messages\Messenger;
+use EvolutionSDK\Messages\v0_4_12\MessageBuilder;
+use Exception;
 
 class Evolution
 {
     private string $base_url;
     private string $token;
+    private API $api;
 
-    public function __construct(string $base_url = null, string $token = null)
+    private string $version = 'v0.4.12';
+
+    public const VERSION_0_4_12 = 'v0.4.12';
+    public const VERSION_2_0_0 = 'v2.0.0';
+
+    public function __construct(string $base_url = null, string $token = null, string $version = 'v0.4.12')
     {
+        $this->api = new API($base_url, $token);
         $this->base_url = $base_url;
         $this->token = $token;
+        $this->version = $version;
     }
 
-    public function instance(): InstanceHandler
+    /**
+     * @throws Exception
+     */
+    public function instance(): InstanceInterface
     {
-        return new InstanceHandler($this->base_url, $this->token);
+        switch ($this->version) {
+            case self::VERSION_0_4_12:
+                return new InstanceHandler($this->api);
+            case self::VERSION_2_0_0:
+                return new \EvolutionSDK\Instances\v2_0_0\InstanceHandler($this->api);
+        }
+
+        throw new Exception("version {$this->version} not supported");
     }
 
     public function messenger(): Messenger
     {
-        return new Messenger($this->base_url, $this->token);
+        return new Messenger($this->api);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function messageBuilder(): MessageBuilderInterface
+    {
+        switch ($this->version) {
+            case 'v0.4.12':
+                return new MessageBuilder();
+            case 'v2.0.0':
+                return new \EvolutionSDK\Messages\v2_0_0\MessageBuilder();
+        }
+
+        throw new Exception("version {$this->version} not supported");
     }
 }
