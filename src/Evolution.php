@@ -3,11 +3,11 @@
 namespace EvolutionSDK;
 
 use EvolutionSDK\HttpClient\API;
-use EvolutionSDK\Instances\v0_4_12\InstanceHandler;
+use EvolutionSDK\Instances\v1\InstanceHandler;
 use EvolutionSDK\Interfaces\InstanceInterface;
 use EvolutionSDK\Interfaces\MessageBuilderInterface;
 use EvolutionSDK\Messages\Messenger;
-use EvolutionSDK\Messages\v0_4_12\MessageBuilder;
+use EvolutionSDK\Messages\v1\MessageBuilder;
 use Exception;
 
 class Evolution
@@ -38,7 +38,7 @@ class Evolution
             case self::VERSION_0_4_12:
                 return new InstanceHandler($this->api);
             case self::VERSION_2_0_0:
-                return new \EvolutionSDK\Instances\v2_0_0\InstanceHandler($this->api);
+                return new \EvolutionSDK\Instances\v2\InstanceHandler($this->api);
         }
 
         throw new Exception("version {$this->version} not supported");
@@ -58,7 +58,7 @@ class Evolution
             case 'v0.4.12':
                 return new MessageBuilder();
             case 'v2.0.0':
-                return new \EvolutionSDK\Messages\v2_0_0\MessageBuilder();
+                return new \EvolutionSDK\Messages\v2\MessageBuilder();
         }
 
         throw new Exception("version {$this->version} not supported");

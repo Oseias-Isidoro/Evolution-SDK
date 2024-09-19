@@ -1,6 +1,6 @@
 <?php
 
-namespace EvolutionSDK\Instances\v2_0_0;
+namespace EvolutionSDK\Instances\v1;
 
 use EvolutionSDK\HttpClient\API;
 use EvolutionSDK\Instances\Instance;
@@ -37,20 +37,14 @@ class InstanceHandler implements InstanceInterface
             'instanceName' => $name,
             'token' => $token,
             'qrcode' => $qrcode,
+            'events' => $events,
             'webhookByEvents' => $webhookByEvents,
-            'webhook' => [
-                'url' => $webhook,
-                'events' => $events,
-            ],
+            'webhook' => $webhook,
         ];
 
         $payload = array_merge($payload, $customFields);
 
-        error_log(json_encode($payload));
-
         $response = $this->API->post('/instance/create', $payload);
-
-        error_log($response->body());
 
         if ($response->failed()) {
             throw new Exception($response->body(), $response->status());

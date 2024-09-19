@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace EvolutionSDK\Messages\v0_4_12;
+namespace EvolutionSDK\Messages\v2;
 
 use EvolutionSDK\Interfaces\MessageBuilderInterface;
 use EvolutionSDK\Messages\Message;
@@ -14,7 +14,7 @@ class MessageBuilder implements MessageBuilderInterface
 
     public function __construct()
     {
-        $this->message['options'] = [
+        $this->message = [
             "delay" => 1200,
             "presence" => "composing"
         ];
@@ -36,22 +36,18 @@ class MessageBuilder implements MessageBuilderInterface
 
     public function text(string $text): MessageBuilder
     {
-        $this->message['textMessage'] = [
-            'text' => $text
-        ];
+        $this->message['text'] = $text;
 
         return $this;
     }
 
     public function media(string $url, string $mediaType, string $fileName = null): MessageBuilder
     {
-        $this->message['mediaMessage'] = [
-            'mediatype' => $mediaType,
-            'media' => $url,
-        ];
+        $this->message['mediatype'] = $mediaType;
+        $this->message['media'] = $url;
 
         if ($fileName and $mediaType != 'image') {
-            $this->message['mediaMessage']['fileName'] = $fileName;
+            $this->message['fileName'] = $fileName;
         }
 
         return $this;
@@ -59,24 +55,19 @@ class MessageBuilder implements MessageBuilderInterface
 
     public function audio(string $url): MessageBuilder
     {
-        $this->message['options']['presence'] = 'recording';
-        $this->message['options']['encoding'] = true;
-
-        $this->message['audioMessage'] = [
-            'audio' => $url,
-        ];
+        $this->message['presence'] = 'recording';
+        $this->message['encoding'] = true;
+        $this->message['audio'] = $url;
 
         return $this;
     }
 
     public function mentions(bool $everyOne = true, array $data = []): MessageBuilder
     {
-        $this->message['mentions'] = [
-            "everyOne" => $everyOne,
-        ];
+        $this->message['mentionsEveryOne'] = $everyOne;
 
         if (!$everyOne) {
-            $this->message['mentions']['mentioned'] = $data;
+            $this->message['mentioned'] = $data;
         }
 
         return $this;
@@ -84,39 +75,33 @@ class MessageBuilder implements MessageBuilderInterface
 
     public function reply(array $data): MessageBuilder
     {
-        $this->message['options']['quoted'] = $data;
+        $this->message['quoted'] = $data;
 
         return $this;
     }
 
     public function location(string $name, $latitude, $longitude): MessageBuilder
     {
-        $this->message['locationMessage'] = [
-            'name' => $name,
-            'latitude' => $latitude,
-            'longitude' => $longitude,
-        ];
+        $this->message['name'] = $name;
+        $this->message['latitude'] = $latitude;
+        $this->message['longitude'] = $longitude;
 
         return $this;
     }
 
     public function sticker(string $url): MessageBuilder
     {
-        $this->message['stickerMessage'] = [
-            'image' => $url,
-        ];
+        $this->message['sticker'] = $url;
 
         return $this;
     }
 
     public function contact(string $fullName, string $phoneNumber): MessageBuilder
     {
-        $this->message['contactMessage'] = [
-            [
-                'fullName' => $fullName,
-                'wuid' => $phoneNumber,
-                'phoneNumber' => "+$phoneNumber",
-            ]
+        $this->message['contact'][] = [
+            'fullName' => $fullName,
+            'wuid' => $phoneNumber,
+            'phoneNumber' => "+$phoneNumber",
         ];
 
         return $this;
@@ -151,8 +136,8 @@ class MessageBuilder implements MessageBuilderInterface
     public function getMessage(): Message
     {
         if ($this->hasMedia() and $this->hasText()) {
-            $this->message['mediaMessage']['caption'] = $this->message['textMessage']['text'];
-            unset($this->message['textMessage']);
+            $this->message['caption'] = $this->message['text'];
+            unset($this->message['text']);
         }
 
         return new Message($this->message, $this->instance);
