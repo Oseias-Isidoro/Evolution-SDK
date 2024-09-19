@@ -12,9 +12,9 @@ class Messenger
 {
     private API $API;
 
-    public function __construct(string $base_url, string $token)
+    public function __construct(API $api)
     {
-        $this->API = new API($base_url, $token);
+        $this->API = $api;
     }
 
     /**
