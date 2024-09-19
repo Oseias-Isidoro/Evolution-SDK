@@ -1,19 +1,22 @@
 <?php
 
-namespace EvolutionSDK\Instances;
+namespace EvolutionSDK\Instances\v0_4_12;
 
 use EvolutionSDK\HttpClient\API;
+use EvolutionSDK\Instances\Instance;
+use EvolutionSDK\Interfaces\InstanceInterface;
 use EvolutionSDK\Transformers\APIInstanceResponse\APIInstanceResponseTransformer;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 
-class InstanceHandler
+class InstanceHandler implements InstanceInterface
 {
     private API $API;
 
-    public function __construct(string $base_url = null, string $token = null)
+
+    public function __construct(API $api)
     {
-        $this->API = new API($base_url, $token);
+        $this->API = $api;
     }
 
     /**
