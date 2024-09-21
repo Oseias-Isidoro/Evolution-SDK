@@ -52,6 +52,6 @@ class Message
 
     public function hasTemplate(): bool
     {
-        return isset($this->data['templateMessage']);
+        return isset($this->data['components']);
     }
 }

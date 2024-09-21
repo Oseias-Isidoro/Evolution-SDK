@@ -80,11 +80,12 @@ class MessageBuilder implements MessageBuilderInterface
         return $this;
     }
 
-    public function location(string $name, $latitude, $longitude): MessageBuilder
+    public function location(string $name, $latitude, $longitude, string $address = ''): MessageBuilder
     {
         $this->message['name'] = $name;
         $this->message['latitude'] = $latitude;
         $this->message['longitude'] = $longitude;
+        $this->message['address'] = $address;
 
         return $this;
     }
@@ -109,11 +110,9 @@ class MessageBuilder implements MessageBuilderInterface
 
     public function templateMessage(string $name, string $language, array $components): MessageBuilder
     {
-        $this->message['templateMessage'] = [
-            'name' => $name,
-            'language' => $language,
-            'components' => $components
-        ];
+        $this->message['name'] = $name;
+        $this->message['language'] = $language;
+        $this->message['components'] = $components;
 
         return $this;
     }
