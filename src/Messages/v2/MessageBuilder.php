@@ -120,27 +120,32 @@ class MessageBuilder implements MessageBuilderInterface
 
     public function hasContact(): bool
     {
-        return isset($this->data['contactMessage']) OR isset($this->data['contact']);
+        return isset($this->message['contactMessage']) OR isset($this->message['contact']);
     }
 
     public function hasSticker(): bool
     {
-        return isset($this->data['stickerMessage']) OR isset($this->data['sticker']);
+        return isset($this->message['stickerMessage']) OR isset($this->message['sticker']);
     }
 
     public function hasLocation(): bool
     {
-        return isset($this->data['locationMessage']) OR (isset($this->data['latitude']) AND isset($this->data['longitude']));
+        return isset($this->message['locationMessage']) OR (isset($this->message['latitude']) AND isset($this->message['longitude']));
     }
 
     public function hasMedia(): bool
     {
-        return isset($this->data['mediaMessage']) OR isset($this->data['media']);
+        return isset($this->message['mediaMessage']) OR isset($this->message['media']);
     }
 
     public function hasAudio(): bool
     {
-        return isset($this->data['audioMessage']) OR isset($this->data['audio']);
+        return isset($this->message['audioMessage']) OR isset($this->message['audio']);
+    }
+
+    public function hasText(): bool
+    {
+        return isset($this->message['text']);
     }
 
     public function getMessage(): Message
