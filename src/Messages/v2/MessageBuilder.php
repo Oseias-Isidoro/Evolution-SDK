@@ -130,7 +130,7 @@ class MessageBuilder implements MessageBuilderInterface
 
     private function hasText(): bool
     {
-        return isset($this->message['textMessage']);
+        return isset($this->message['text']);
     }
 
     public function getMessage(): Message
