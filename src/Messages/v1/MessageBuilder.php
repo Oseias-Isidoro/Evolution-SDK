@@ -16,6 +16,7 @@ class MessageBuilder implements MessageBuilderInterface
     {
         $this->message['options'] = [
             "delay" => 1200,
+            "sendMessage" => false,
             "presence" => "composing"
         ];
     }
