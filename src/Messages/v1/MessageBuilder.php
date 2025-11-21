@@ -16,10 +16,11 @@ class MessageBuilder implements MessageBuilderInterface
     {
         $this->message['options'] = [
             "delay" => 1200,
-            "sendMessage" => false,
             "presence" => "composing"
         ];
-    }
+
+        $this->message['sendMessage'] = false;
+     }
 
     public function from(string $instance): MessageBuilder
     {
